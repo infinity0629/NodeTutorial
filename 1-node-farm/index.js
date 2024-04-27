@@ -50,11 +50,11 @@ fs.readFile("./txt/start.txt", "utf-8", (err, data1) => {
  * =====================================================================
  */
 import http from "http";
-import { fileURLToPath } from "url";
+import url from "url";
 import { dirname } from "path";
 
 // 获取当前工程绝对路径
-const __filename = fileURLToPath(import.meta.url);
+const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 // 静态资源可以先获取放入内存方便后面使用
@@ -98,10 +98,10 @@ const server = http.createServer((req, res) => {
     // /
     // /favicon.ico
 
-    const pathName = req.url;
+    const { query, pathname } = url.parse(req.url, true);
 
     // 配置路由
-    if (pathName === "/" || pathName === "/overview") {
+    if (pathname === "/" || pathname === "/overview") {
         res.writeHead(200, {
             "Content-Type": "text/html",
         });
@@ -113,12 +113,18 @@ const server = http.createServer((req, res) => {
         const ouput = templateOverview.replace("{%PRODUCT_CARDS%}", cardsHtml);
 
         res.end(ouput);
-    } else if (pathName === "/product") {
+    } else if (pathname === "/product") {
         res.writeHead(200, {
             "Content-Type": "text/html",
         });
-        res.end(templateProduct);
-    } else if (pathName === "/api") {
+
+        const output = replaceTemplate(
+            templateProduct,
+            dataObj.find((element) => String(element.id) === query.id)
+        );
+
+        res.end(output);
+    } else if (pathname === "/api") {
         res.writeHead(200, {
             "Content-Type": "application/json",
         });
