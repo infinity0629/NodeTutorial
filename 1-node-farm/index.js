@@ -52,7 +52,12 @@ fs.readFile("./txt/start.txt", "utf-8", (err, data1) => {
 import http from "http";
 import url from "url";
 import { dirname } from "path";
+
+// 引入自定义其他模块
 import { replaceTemplate } from "./modules/replaceTemplate.js";
+
+// 引入第三方库
+import slugify from "slugify";
 
 // 获取当前工程绝对路径
 const __filename = url.fileURLToPath(import.meta.url);
@@ -73,6 +78,12 @@ const templateProduct = fs.readFileSync(
 );
 const data = fs.readFileSync(`${__dirname}/dev-data/data.json`, "utf-8");
 const dataObj = JSON.parse(data);
+
+// 使用第三方库
+const slugs = dataObj.map((element) =>
+    slugify(element.productName, { lower: true })
+);
+console.log(slugs);
 
 // 创建 server
 const server = http.createServer((req, res) => {
