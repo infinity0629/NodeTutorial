@@ -4,7 +4,7 @@
   "main": "event-loop.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon ./event.js"
+    "start": "nodemon ./streams.js"
   },
   "keywords": [],
   "author": "",
