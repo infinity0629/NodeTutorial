@@ -12,7 +12,14 @@ const checkID = (req, res, next, val) => {
     res.status(404).json({ status: "fail", message: "Invalid ID" });
     return;
   }
+  next();
+};
 
+const checkBody = (req, res, next) => {
+  if (!req.body.name || !req.body.price) {
+    res.status(404).json({ status: "fail", message: "Missing name or price" });
+    return;
+  }
   next();
 };
 
@@ -66,6 +73,7 @@ const deleteTour = (req, res) => {
 
 export default {
   checkID,
+  checkBody,
   getAllTours,
   getTour,
   createTour,
