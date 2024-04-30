@@ -19,7 +19,6 @@ const checkID = (req, res, next, val) => {
 const getAllTours = (req, res) => {
   res.status(200).json({
     status: "success",
-    requestedAt: req.requestTime,
     results: tours.length,
     data: { tours },
   });
