@@ -1,5 +1,5 @@
 import fs from "fs";
-import config from "../config.js";
+import config from "../utils.js";
 
 const users = JSON.parse(
   fs.readFileSync(`${config.__dirname}/dev-data/data/users.json`)
