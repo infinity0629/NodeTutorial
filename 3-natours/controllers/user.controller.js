@@ -2,7 +2,7 @@ import fs from "fs";
 import config from "../utils.js";
 
 const users = JSON.parse(
-  fs.readFileSync(`${config.dirname}/dev-data/data/users.json`)
+  fs.readFileSync(`${config.currentDir}/dev-data/data/users.json`)
 );
 
 const getAllUsers = (req, res) => {
