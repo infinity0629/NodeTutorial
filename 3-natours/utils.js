@@ -1,7 +1,6 @@
 import url from "url";
-import { dirname } from "path";
+import { dirname as __dirname } from "path";
 
-const __filename = url.fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const dirname = __dirname(url.fileURLToPath(import.meta.url));
 
-export default { __dirname };
+export default { dirname };
