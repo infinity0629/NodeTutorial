@@ -1,8 +1,8 @@
 import fs from "fs";
-import config from "../utils.js";
+import utils from "../utils.js";
 
 const users = JSON.parse(
-  fs.readFileSync(`${config.currentDir}/dev-data/data/users.json`)
+  fs.readFileSync(`${utils.projectDir}/dev-data/data/users.json`)
 );
 
 const getAllUsers = (req, res) => {

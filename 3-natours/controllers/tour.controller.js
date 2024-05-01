@@ -1,8 +1,8 @@
 import fs from "fs";
-import config from "../utils.js";
+import utils from "../utils.js";
 
 const tours = JSON.parse(
-  fs.readFileSync(`${config.currentDir}/dev-data/data/tours-simple.json`)
+  fs.readFileSync(`${utils.projectDir}/dev-data/data/tours-simple.json`)
 );
 
 const checkID = (req, res, next, val) => {
@@ -45,7 +45,7 @@ const createTour = (req, res) => {
   const newTour = Object.assign({ id: newId }, req.body);
   tours.push(newTour);
   fs.writeFile(
-    `${config.currentDir}/dev-data/data/tours-simple.json`,
+    `${utils.projectDir}/dev-data/data/tours-simple.json`,
     JSON.stringify(tours),
     (err) => {
       res.status(201).json({ status: "success", data: { tour: newTour } });
